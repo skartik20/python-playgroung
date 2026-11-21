@@ -21,6 +21,7 @@ def add_video(videos):
 def update_video(videos):
     list_all_videos(videos)
     index = int(input("Enter the number of the video to update: "))
+
     if 1 <= index <= len(videos):
         title = input("Enter new video title: ")
         time = input("Enter new video time: ")
@@ -32,6 +33,7 @@ def update_video(videos):
 def delete_video(videos):
     list_all_videos(videos)
     index = int(input("Enter the number of the video to delete: "))
+    
     if 1 <= index <= len(videos):
         videos.pop(index - 1)
         save_data_helper(videos)
