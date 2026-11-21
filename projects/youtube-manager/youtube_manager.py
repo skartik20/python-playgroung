@@ -7,6 +7,9 @@ def list_all_videos(videos):
     print('\n')
     print('*' * 70)
     for index, video in enumerate(videos, start=1):
+        # enumerate is used to get the index of the video in the list, starting from 1.
+        # otherwise, we would have to manually keep track of the index.
+        # this way both user and developer can easily see the index of the video in the list.
         print(f"{index}. {video['title']} - {video['time']}")
 
     print('\n')
