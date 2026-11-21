@@ -4,23 +4,52 @@ import json
 
 
 def list_all_videos(videos):
-    pass  # Implement the logic to list all videos
+    print('\n')
+    print('*' * 70)
+    for index, video in enumerate(videos, start=1):
+        print(f"{index}. {video['title']} - {video['time']}")
+
+    print('\n')
+    print('*' * 70)
 
 def add_video(videos):
-    pass  # Implement the logic to add a new video
+    title = input("Enter video title: ")
+    time = input("Enter video time: ")
+    videos.append({"title": title, "time": time})
+    save_data_helper(videos)
 
 def update_video(videos):
-    pass  # Implement the logic to update video details
+    list_all_videos(videos)
+    index = int(input("Enter the number of the video to update: "))
+    if 1 <= index <= len(videos):
+        title = input("Enter new video title: ")
+        time = input("Enter new video time: ")
+        videos[index - 1] = {"title": title, "time": time}
+        save_data_helper(videos)
+    else:
+        print("Invalid video number.")
 
 def delete_video(videos):
-    pass  # Implement the logic to delete a video
+    list_all_videos(videos)
+    index = int(input("Enter the number of the video to delete: "))
+    if 1 <= index <= len(videos):
+        videos.pop(index - 1)
+        save_data_helper(videos)
+    else:
+        print("Invalid video number.")
 
 def load_data():
     try:
         with open('youtube.txt', 'r') as file:
-            return json.load(file)
+            test = json.load(file)
+            # print(type (test))
+            return test
     except FileNotFoundError:
         return []
+
+def save_data_helper(videos):
+    with open('youtube.txt', 'w') as file:
+        json.dump(videos, file)
 
 def main():
     videos = load_data()  # This would load the existing video data into the 'videos' variable
@@ -33,6 +62,7 @@ def main():
         print("4. Delete a video")
         print("5. Exit the app")
         choice = input("Enter your choice (1-5): ")
+        # print(videos)
 
         match choice:
             case "1":
